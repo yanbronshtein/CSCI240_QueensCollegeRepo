@@ -29,26 +29,29 @@
 
 #}
 
+#void displayResult(int result)
+#{
+#	printf("The result of the computation is \n %d",result);
 
+#}
 # int main()
 #{
-	#while(!checkInput1){
-	#	Prompt user for input1
-	#
-	#	call checkInput1(input1)
-	#}
-
-
-
-
-	#while(!checkInput2){
-	#	Prompt user for input2
-	#
-	#	call checkInput2(input2)
-	#}
-
-#	result = (8*int1 + int2 - 26)
-#	display(result)
+#	int int1 = 0,int2 = 0,result = 0;
+#	do{
+#		
+#		printf("Please enter an integer in the range [-20,5]\n");
+#		scanf("%d",&int1);
+#	}while(!checkInput1(input1) 
+#
+#
+#	do{
+#		printf("Please enter an integer in the range [-20,5]\n");
+#		scanf("%d",&int1);	
+#	}while(!checkInput2(input2) 
+#
+#	result = (8*int1 + int2 - 26);
+#	
+#	display(result);
 	
 #	return 0;
 #}

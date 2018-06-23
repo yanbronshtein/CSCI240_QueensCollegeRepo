@@ -1,17 +1,65 @@
-#Julien Bankier
-#June 23, 2018
-#Bankier_h2
+###################################################
+
+#Name: Yaniv Bronshtein
+#Last Modified: 06/2/18
 #
+#Program Name: bronshtein_hw2.S
+
+#Description: This program prompts the user to input
+#2 integers in the specified ranges computes a value
+#based on the specified formula and displays the output back to the user according to the formula :8*int1+int2-26
+
+
+
+#Pseudocode:
+#
+
+
 #Write a MIPS assembly language program that accomplishes the following tasks:
 #The program will prompt the user to enter 10 values that will represent the elements of an array.
 #Compute and display the average of these elements.
 #Display the elements of the array on one column, in reverse order with a step of 2.
 #
-#psudo-code 
-# int[] array = int[10];
-# int sum,num, avr = 0;
-# scanner reader = new scanner(system.in);
-# system.out.println("enter a num");
+
+# 
+
+#   #define size 10
+#
+# #include <stdio.h>
+# #include <stdlib.h>
+#
+
+
+
+
+int average(float array[],int size)
+{
+    int i;
+    int avg, sum = 0;
+    for (i = 0; i < size; ++i) {
+        sum += array[i];
+    }
+    avg = (sum / size);
+    return avg;
+}
+
+
+int main(int argc, char **argv){ 
+#	int array[size];	
+#	int sum = 0,avg = 0;
+# 	printf("Enter a set of 10 integer values.\n");
+#	int i;
+	
+	for(i = 0; i < size ;++i)
+	{
+		array[i] = atoi(argv[i]);
+		
+	}
+	avg = average(average,size);
+	printf("The average is:\n");
+	
+# 
+	
 # for (int i = 0; i<array.length; i++)
 #	int num = reader.nextInt()
 #	array[i] = num;
@@ -20,14 +68,12 @@
 # for (int i = array.length; i>0, i-=2)
 #	println(array[i]);
 #system.exit(0)
-#
-#
 
 .data 
 	array: .space 40 # 10 ints * 4 
 	size: .word 10
-	promptnum: 	.asciiz "Enter a numbers to store in array: "
-	computedAverage: .asciiz "Average of array indexs is:"
+	promptnum: 	.asciiz "Enter a set of integer values.\n"
+	computedAverage: .asciiz "The average is:\n"
 	newline: .asciiz "\n"
 
 
@@ -75,7 +121,6 @@
 
 	move $t4, $v0 	#move int to a dif location
 
-	
 	sw $t4, array($t0) 	#save at index 3 in array
 
 	addi $t0, $t0, 4 	#incremnt counter up by one
@@ -149,20 +194,9 @@
 	addi $t0, $t0, 4	#incremnt counter up by one
 
 	add $a3,$a3, $t9	#add number to sum
-
+	
 	jal calcAverage
-
-
-calcAverage:
-	li $t9, 10
-	div $a3,$t9
-	mflo $t8
-	
-	
- exitEarly:	
-    	li $v0, 10
-   	syscall	
-	
+	jal carriageReturn
 	#print sum ($a3)
   	##move $a0, $a3
    	#syscall
@@ -174,12 +208,12 @@ calcAverage:
 	#load array into t1 at 0
 	
 
-printArray:
+printReverseArray:
 
 	beq $t0, 0, exit	#as long as its not 0	
 	lw $t1, array($t0)
 	#increment down by 2
-	jal printElem
+	jal printNum
 	
 	 
 	
@@ -188,7 +222,21 @@ printArray:
 	jal carriageReturn
 	
 	
-	j printArray
+	j printReverseArray
+	
+
+	
+calcAverage:
+	la $t9, size
+	div $a3, $t8
+	mflo $t1
+	#Print prompt average
+	li $v0, 4
+	la $a0,computedAverage 
+	syscall
+	jal printNum
+	
+	jr $ra
 	
 	
 	 # End Program
@@ -220,7 +268,7 @@ carriageReturn:
 	syscall
 	jr $ra
 	
-printElem:
+printNum:
 #print array
 	li $v0, 1
 	move $a0, $t1
@@ -228,14 +276,9 @@ printElem:
 	jr $ra
 	
 
+	
+	
+		
 
-	
-	
-	
-	
-	
-	
-	
-	
-	 
+	 	
 	
