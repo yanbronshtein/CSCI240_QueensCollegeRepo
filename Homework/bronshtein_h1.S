@@ -31,7 +31,7 @@
 
 #void displayResult(int result)
 #{
-#	printf("The result of the computation is \n %d",result);
+#	printf(""The result of the computation 8*int1 + int2 - 26 is \n %d",result);
 
 #}
 # int main()
@@ -39,13 +39,13 @@
 #	int int1 = 0,int2 = 0,result = 0;
 #	do{
 #		
-#		printf("Please enter an integer in the range [-20,5]\n");
+#		printf("Please enter an integer in the range [-20,5]. Type the number 99 to quit\n");
 #		scanf("%d",&int1);
 #	}while(!checkInput1(input1) 
 #
 #
 #	do{
-#		printf("Please enter an integer in the range [-20,5]\n");
+#		printf("Please enter a second integer that is less than 0. Type the number 99 to quit\n");
 #		scanf("%d",&int1);	
 #	}while(!checkInput2(input2) 
 #
@@ -64,8 +64,8 @@
  		
 ################################################### 	
  	.data
- 		PROMPT1: .asciiz "Please enter an integer in the range [-20,5]\n"
- 		PROMPT2: .asciiz "Please enter a second integer that is less than 0\n"
+ 		PROMPT1: .asciiz "Please enter an integer in the range [-20,5]. Type the number 99 to quit\n"
+ 		PROMPT2: .asciiz "Please enter a second integer that is less than 0. Type the number 99 to quit\n"
  		RESULT: .asciiz "The result of the computation is\n"
  		RESULT_PROMPT: .asciiz "The result of the computation 8*int1 + int2 - 26 is :\n"
  		int1: .word 0

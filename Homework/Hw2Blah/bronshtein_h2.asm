@@ -19,55 +19,53 @@
 #The program will prompt the user to enter 10 values that will represent the elements of an array.
 #Compute and display the average of these elements.
 #Display the elements of the array on one column, in reverse order with a step of 2.
-#
 
-# 
 
-#   #define size 10
-#
+
 # #include <stdio.h>
 # #include <stdlib.h>
-#
 
 
 
 
-int average(float array[],int size)
-{
-    int i;
-    int avg, sum = 0;
-    for (i = 0; i < size; ++i) {
-        sum += array[i];
-    }
-    avg = (sum / size);
-    return avg;
-}
 
+#int average(int array[],int size)
+#{
+#    int i;
+#    int avg, sum = 0,step = 2,size = 10;
+#    for (i = 0; i < size; ++i) {
+#        sum += array[i];
+#    }
+#    avg = (sum / size);
+#    return avg;
+#}
 
-int main(int argc, char **argv){ 
+#void printArray(int array[],int size,int step)
+#{
+#	int i;
+#	for(int i = size; i > 0; --i)
+#	{
+#		printf("%d\n",array[i];
+	
+#	}
+#}
+#int main(int argc, char **argv){ 
 #	int array[size];	
 #	int sum = 0,avg = 0;
 # 	printf("Enter a set of 10 integer values.\n");
 #	int i;
 	
-	for(i = 0; i < size ;++i)
-	{
-		array[i] = atoi(argv[i]);
-		
-	}
-	avg = average(average,size);
-	printf("The average is:\n");
-	
-# 
-	
-# for (int i = 0; i<array.length; i++)
-#	int num = reader.nextInt()
-#	array[i] = num;
-#	sum = sum + num;
-# avr = sum/10;
-# for (int i = array.length; i>0, i-=2)
-#	println(array[i]);
-#system.exit(0)
+#	for(i = 0; i < size ;++i)
+#	{
+#		scanf("%d",(array + i));
+#		
+#	}
+#	avg = average(average,size);
+#	printf("The average is:\n");
+#	printArray(array,size,step);
+#	
+#	return 0;
+#}
 
 .data 
 	array: .space 40 # 10 ints * 4 
