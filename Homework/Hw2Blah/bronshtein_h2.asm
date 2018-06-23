@@ -75,6 +75,7 @@
 	newline: .asciiz "\n"
 
 
+
 .text
 
 	addi $t0, $zero, 0	#create couter init at 0

@@ -36,12 +36,15 @@
 #}
 # int main()
 #{
-#	int int1 = 0,int2 = 0,result = 0;
+#	int int1 = 0,int2 = 0,result = 0,sentinel = 99;
 #	do{
 #		
 #		printf("Please enter an integer in the range [-20,5]. Type the number 99 to quit\n");
 #		scanf("%d",&int1);
-#	}while(!checkInput1(input1) 
+		if(int1 == 99){
+			exit(1);
+		}
+#	}while(!checkInput1(input1)) 
 #
 #
 #	do{
@@ -68,9 +71,11 @@
  		PROMPT2: .asciiz "Please enter a second integer that is less than 0. Type the number 99 to quit\n"
  		RESULT: .asciiz "The result of the computation is\n"
  		RESULT_PROMPT: .asciiz "The result of the computation 8*int1 + int2 - 26 is :\n"
+ 		GOODBYE: .asciiz "la revedere\n"
  		int1: .word 0
  		int2: .word 0
  		result: .word 0
+
 
  	
  	
@@ -94,6 +99,10 @@ main:
  	
  	li $v0,5 # system call code for reading an integer from console
  	syscall
+ 	
+ 	#Check if hit sentinel. Exit if so
+ 	beq $v0,99,exit
+ 	
  	move $t0, $v0 #Save the integer in register t1
  	
  	#push registers 
@@ -101,7 +110,8 @@ main:
  	
  	jal checkFirstInt
  	
- 	bne $v0,1, while1 #continue to top of while loop if invalid input 
+ 	bne $v0,1, while1 #continue to top of while loop if invalid input
+ 	 
  	
  
 
@@ -115,6 +125,9 @@ main:
  	
  	li $v0,5 # system call code for reading an integer from console
  	syscall
+ 	
+ 	#Check if hit sentinel
+ 	beq $v0,99,exit
  	move $t1, $v0 #Save the integer in register t1
  	
  	#call input validation function
@@ -146,9 +159,9 @@ displayResult:
  	
  	
  	#End Program
- 	li $v0, 10                                                                                                                                                               
-    	syscall
+	j exit
 
+	
  
  
 
@@ -161,6 +174,11 @@ displayResult:
  #Input Validation for first int
  	
  checkFirstInt:
+ 	
+ 	#Check if hit sentinel
+# 	la $t9,sentinel
+#	beq $t2,$t9,exit
+ 	
  	#check lower bound
  	
  	
@@ -172,7 +190,7 @@ displayResult:
  	sub $t3,$t3,$t0
  	bltz $t3, returnInvalid1
  	
-
+	
  	#default returns valid
  	li $v0, 1
  	jr $ra
@@ -184,6 +202,10 @@ displayResult:
  
 #Input Validation for second int
  checkSecondInt:
+ 	#Check if hit sentinel
+# 	la $t9,sentinel
+ #	beq $t2,$t9,exit
+ 	
  	#check upper bound
  	slti $t2,$t1,0
  	bne $t2,1,returnInvalid2 
@@ -195,7 +217,12 @@ returnInvalid2:
  	jr $ra	
 	 	
  
- 
+ exit:
+  	li $v0,4 #Prompt the user to enter a second integer that is less than 0
+ 	la $a0, GOODBYE
+ 	syscall
+  	li $v0, 10                                                                                                                                                               
+    	syscall
 
  	
  	
