@@ -142,7 +142,7 @@ displayResult:
  	syscall
  	
  	
- 	#
+ 	#End Program
  	li $v0, 10                                                                                                                                                               
     	syscall
 
