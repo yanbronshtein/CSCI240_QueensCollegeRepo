@@ -37,116 +37,117 @@
 	
 	#prompt for first num
 	jal readInt
-	#move int to a dif location
-	move $t1, $v0
-	#save at index 0 in array
-	sw $t1, array($t0)
-	#incremnt counter up by one
-	addi $t0, $t0, 4
-	#add number to sum
-	add $a3, $a3, $t1
 	
-	#again for number 2
-	jal readInt
-	#move int to a dif location
-	move $t2, $v0
-	#save at index 1 in array
-	sw $t2, array($t0)
-	#incremnt counter up by one
-	addi $t0, $t0, 4
-	#add number to sum
-	add $a3,$a3, $t2
 	
-	#again for number 3
-	jal readInt
-	syscall 
-	#move int to a dif location
-	move $t3, $v0
-	#save at index 2 in array
-	sw $t3, array($t0)
-	#incremnt counter up by one
-	addi $t0, $t0, 4
-	#add number to sum
-	add $a3,$a3, $t3
+	move $t1, $v0 	#move int to a dif location
+
+	sw $t1, array($t0)	#save at index 0 in array
 	
-	#again for number 4
-	jal readInt
-	#move int to a dif location
-	move $t4, $v0
-	#save at index 3 in array
-	sw $t4, array($t0)
-	#incremnt counter up by one
-	addi $t0, $t0, 4
-	#add number to sum
-	add $a3,$a3, $t4
+
+	addi $t0, $t0, 4	#incremnt counter up by one
+
+	add $a3, $a3, $t1	#add number to sum
 	
-	#again for number 5
-	jal readInt
-	#move int to a dif location
-	move $t5, $v0
-	#save at index 4 in array
-	sw $t5, array($t0)
-	#incremnt counter up by one
-	addi $t0, $t0, 4
-	#add number to sum
-	add $a3,$a3, $t5
+
+	jal readInt	#again for number 2
+
+	move $t2, $v0	#move int to a dif location
+
+	sw $t2, array($t0)	#save at index 1 in array
+
+	addi $t0, $t0, 4	#incremnt counter up by one
+
+	add $a3,$a3, $t2	#add number to sum
 	
-	#again for number 6
-	jal readInt
-	#move int to a dif location
-	move $t6, $v0
-	#save at index 5 in array
-	sw $t6, array($t0)
-	#incremnt counter up by one
-	addi $t0, $t0, 4
-	#add number to sum
-	add $a3,$a3, $t6
+
+	jal readInt 	#again for number 3
+
+	move $t3, $v0 	#move int to a dif location
+
+	sw $t3, array($t0) 	#save at index 2 in array
+
+	addi $t0, $t0, 4 	#incremnt counter up by one
+
+	add $a3,$a3, $t3 	#add number to sum
 	
-	#again for number 7
-	jal readInt
-	#move int to a dif location
-	move $t7, $v0
-	#save at index 6 in array
-	sw $t7, array($t0)
-	#incremnt counter up by one
-	addi $t0, $t0, 4
-	#add number to sum
-	add $a3,$a3, $t7
+
+	jal readInt 	#again for number 4
+
+	move $t4, $v0 	#move int to a dif location
+
+	sw $t4, array($t0) 	#save at index 3 in array
+
+	addi $t0, $t0, 4 	#incremnt counter up by one
+
+	add $a3,$a3, $t4 	#add number to sum
 	
-	#again for number 8
-	jal readInt
-	#move int to a dif location
-	move $t8, $v0
-	#save at index 7 in array
-	sw $t8, array($t0)
-	#incremnt counter up by one
-	addi $t0, $t0, 4
-	#add number to sum
-	add $a3,$a3, $t8
+
+	jal readInt 	#again for number 5
+
+	move $t5, $v0 	#move int to a dif location
+
+	sw $t5, array($t0)	#save at index 4 in array
+
+	addi $t0, $t0, 4	#incremnt counter up by one
+
+	add $a3,$a3, $t5	#add number to sum
 	
-	#again for number 9
-	jal readInt 
-	#move int to a dif location
-	move $t9, $v0
-	#save at index 8 in array
-	sw $t9, array($t0)
-	#incremnt counter up by one
-	addi $t0, $t0, 4
-	#add number to sum
-	add $a3,$a3, $t9
+
+	jal readInt	#again for number 6
+
+	move $t6, $v0	#move int to a dif location
+
+	sw $t6, array($t0)	#save at index 5 in array
+
+	addi $t0, $t0, 4	#incremnt counter up by one
+
+	add $a3,$a3, $t6	#add number to sum
 	
-	#zero out t9 so i can use it again
-	addi $t9, $zero, 0
-	#again for number 10
-	jal readInt
-	#move int to a dif location
-	move $t9, $v0
-	#save at index 8 in array
-	sw $t9, array($t0)
-	#incremnt counter up by one
-	addi $t0, $t0, 4
-	#add number to sum
-	add $a3,$a3, $t9
+
+	jal readInt	#again for number 7
+
+	move $t7, $v0	#move int to a dif location
+
+	sw $t7, array($t0)	#save at index 6 in array
+
+	addi $t0, $t0, 4	#incremnt counter up by one
+
+	add $a3,$a3, $t7	#add number to sum
+	
+
+	jal readInt	#again for number 8
+
+	move $t8, $v0	#move int to a dif location
+
+	sw $t8, array($t0)	#save at index 7 in array
+
+	addi $t0, $t0, 4	#incremnt counter up by one
+
+	add $a3,$a3, $t8	#add number to sum
+	
+
+	jal readInt 	#again for number 9
+
+	move $t9, $v0	#move int to a dif location
+
+	sw $t9, array($t0)	#save at index 8 in array
+
+	addi $t0, $t0, 4	#incremnt counter up by one
+
+	add $a3,$a3, $t9	#add number to sum
+	
+
+	addi $t9, $zero, 0	#zero out t9 so i can use it again
+
+	jal readInt	#again for number 10
+
+	move $t9, $v0	#move int to a dif location
+
+	sw $t9, array($t0)	#save at index 8 in array
+
+	addi $t0, $t0, 4	#incremnt counter up by one
+
+	add $a3,$a3, $t9	#add number to sum
 	
 	
 	#print sum ($a3)
@@ -161,23 +162,18 @@
 	
 
 printArray:
-	#as long as its not 0
-	beq $t0, 0, exit	
+
+	beq $t0, 0, exit	#as long as its not 0	
 	lw $t1, array($t0)
 	#increment down by 2
-
+	jal printElem
 	
-	#print array
-	li $v0, 1
-	move $a0, $t1
-	syscall 
+	 
 	
 	addi $t0, $t0, -8
 	
-	#print new line
-	li $v0, 4
-	la $a0, newline
-	syscall
+	jal carriageReturn
+	
 	
 	j printArray
 	
@@ -188,15 +184,35 @@ printArray:
    	syscall
 	
 	
-	readInt:
+readInt:
 	li $v0, 4
 	la $a0, promptnum
 	syscall
 	#read int
 	li $v0, 5
 	syscall
-	jr $ra	
+	jr $ra
+
+storeElement:
+	move $v1, $v0 	#move int to a dif location
+
+	sw $v1, array($t0)	#save at index 0 in array
+	jr $ra
 	
+carriageReturn:
+			
+	#print new line
+	li $v0, 4
+	la $a0, newline
+	syscall
+	jr $ra
+	
+printElem:
+#print array
+	li $v0, 1
+	move $a0, $t1
+	syscall	
+	jr $ra
 	
 
 
