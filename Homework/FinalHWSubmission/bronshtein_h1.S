@@ -72,7 +72,7 @@
  		PROMPT2: .asciiz "Please enter a second integer that is less than 0. Type the number 99 to quit\n"
  		RESULT: .asciiz "The result of the computation is\n"
  		RESULT_PROMPT: .asciiz "The result of the computation 8*int1 + int2 - 26 is :\n"
- 		GOODBYE: .asciiz "La revedere Profesor Fluture\n"
+ 		GOODBYE: .asciiz "\nLa revedere Profesor Fluture\n"
  		int1: .word 0
  		int2: .word 0
  		result: .word 0
