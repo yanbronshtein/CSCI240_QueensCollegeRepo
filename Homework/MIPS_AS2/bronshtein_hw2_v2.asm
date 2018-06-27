@@ -65,20 +65,6 @@
 
 
 
-#############Register use  ###############
-
-#$s0: SENTINEL
-
-#$s1: LOWER_BOUND
-#$s2: UPPER_BOUND
-#$s3: RESULT
-#$s4: 1 
-#$s6: 7 
-#$t0: Usually holds the value of n
-#$t4: In the final case this register will hold 7*func(n-2) 
-#$t1: Will be used once to hold the result of the subtraction of UPPER_BOUND-n
-#$t5: Will be used to hold the value 8*n
-#$t7: Will hold the final result of the computation once it is time to print
 
 
 
@@ -91,6 +77,7 @@
 	SENTINEL: .word 99
 	LOWER_BOUND: .word 0
 	UPPER_BOUND: .word 10
+	RESULT: .word -1
 	NEWLINE: .asciiz "\n"
 	
 
@@ -98,15 +85,17 @@
 .text
 
 
-#$t0: holds the value of n
+
 main:
 	lw $s0, SENTINEL
-
+#	li $s0, 3
 	lw $s1, LOWER_BOUND
 	lw $s2, UPPER_BOUND
-	li $s4, 1 
+	lw $s3, RESULT
+	li $s4, 1 #$s4 will store the value 1
+	li $s5,-1 #s5 will store the verified value of n
 	li $s6, 7 
-
+	li $s7,0#s7 will store the value 8 * n
 	
 
 readInt:
@@ -116,6 +105,7 @@ readInt:
 	
 	li $v0,5
 	syscall
+	move $t2,$v0 #Save n into $t2
 	beq $v0,$s0, exit #End program if user hit the sentinel value of 99 on the keyboard
 	
 	move $t0,$v0 #Save the integer read in from the user into $t0 
@@ -125,12 +115,12 @@ readInt:
 	beqz $v0,readInt #Keep prompting user to enter input while input is invalid
 	
 	
-
-	#after breaking out of loop	
-	move $a0, $t0
+	move $s5,$t2 #$s5 now contains the final value of n
 	
-	jal func #function call func(n)
+	move $a0, $s5
 	
+	jal func
+#	sw $v0, 0($s3) #Store the return value in the result memory location
 	move $a0, $v0
 	jal printResult
 
@@ -139,12 +129,14 @@ readInt:
 	
 	 
 	
+	
 
 isValidInt:
-
+#	slt $t0, $a0,$s1 #Check if n <LOWER_BOUND
 	bltz $a0, INVALID
-	sub $t1, $s2, $a0 #Check if n> UPPER_BOUND meaning that UPPER_BOUND-n <0 $t1 holds the value of that subtraction
-	bltz $t1,INVALID #If the contents of $t1 is negative, the result is out of range
+#	bne $t0, $zero, INVALID
+	sub $t1, $s2, $a0 #Check if n> UPPER_BOUND meaning that UPPER_BOUND-n <0
+	bltz $t1,INVALID 
 	j VALID #Default is valid
 	
 	
@@ -168,9 +160,16 @@ INVALID:
 	
 
 func:
+	#move $t6,$ #Copy n into $t6
+	li $v0,1 #Print argument
+	move $a0, $t6
+	syscall
+	
+	
+	
 
-	beq $a0, $zero,baseCase #Check if n==0
-	beq $a0,$s4,baseCase	#check if n==1
+	beq $s5, $zero,baseCase
+	beq $s5,$s4,baseCase	
 	j inductiveCase
 
 
@@ -181,8 +180,8 @@ baseCase:
 inductiveCase:
 
 	
-	#save n followed by the return address onto the stack
 	addi $sp, $sp, -8 #Allocate space on the stack
+	move $a0, $s4
 	sw $ra, 4($sp) #Preserve the return address onto the stack
 	sw $a0, 0($sp) #Push n onto the stack
 	
@@ -192,33 +191,36 @@ inductiveCase:
 	#restore stack 
 	lw $ra,4($sp) #load the return address
 	lw $a0,0($sp)  #Pop $a0	
-	addi $sp, $sp, 8 #change the stack pointer	
+	addi $sp, $sp, 8 #change the stack pointer
 	
-	move $t4, $v0 #t4 has the result of func(n-2)
-
+	move $t4, $v0
+#	mul $v0,$t4,7 # 7*func(n-2)
 	
 	mult $t4,$s6 #lo = 7*func(n-2) 
 	mflo $t4 #Move lower 32 bits of multiplication into $t4
 	
 	
-	sll $t5,$a0,3 #compute 8 *n
+	sll $s7, $s5, 3 #compute 8 *n
 	
-	sub $v0, $t4, $t5 #Return 7*func(n-2)- 8*n
-
+	sub $v0, $t4, $s7 #Return 7*func(n-2)- 8*n
+	#Print contents of $v0
+#	li $v0,1 #Print result value
+#	move $a0, $v0
+#	syscall
 	
 	jr $ra
 	
 	
 
 printResult:
-	move $t7, $a0 #Preserve the value of n
+	move $t0, $a0
 	li $v0, 4
 	la $a0, RESULT_MSG
 	syscall
 	
 	#Print result value
 	li $v0,1 
-	move $a0, $t7
+	move $a0, $t0
 	syscall
 	
 	#print newline
@@ -226,10 +228,6 @@ printResult:
 	la $a0, NEWLINE
 	syscall
 	jr $ra  
-
-
-
-
 exit:
 	li $v0, 4
 	la $a0, GOODBYE_INFORMAL
