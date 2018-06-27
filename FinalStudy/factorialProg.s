@@ -109,20 +109,16 @@ inductiveCase:
 	sw $ra, 4($sp) # save return address register $ra
 	sw $a0, 0($sp) # save argument register $a0=n
 	
-#	addiu $a0, $a0, -1 # $a0 = n-1
 	add $a0, $a0, -1 # $a0 = n-1
 	jal factorial # $v0 = factorial(n-1)
 	
 	#restore stack
 	lw $a0, 0($sp) # restore $a0=n
 	lw $ra, 4($sp) # restore $ra
-#	addiu $sp, $sp, 8 # multipop stack
+
 	add $sp, $sp, 8 # multipop stack	
 	mul $v0, $v0, $a0 # $v0 = fac(n-1) x n
 	jr $ra # return
-
-	
-	
 
 #bool isValidInput(int n)
 #
@@ -146,12 +142,6 @@ isValidInput:
 returnValid:	
 	li $v0,1
 	jr $ra
-
-	
-	
-	
-	
-
 
  	
 exit:

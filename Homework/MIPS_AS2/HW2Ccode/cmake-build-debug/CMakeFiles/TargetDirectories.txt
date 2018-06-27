@@ -1,0 +1,3 @@
+/Users/yanivbronshtein/CSCI240_QueensCollegeRepo/Homework/MIPS_AS2/HW2Ccode/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/yanivbronshtein/CSCI240_QueensCollegeRepo/Homework/MIPS_AS2/HW2Ccode/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/yanivbronshtein/CSCI240_QueensCollegeRepo/Homework/MIPS_AS2/HW2Ccode/cmake-build-debug/CMakeFiles/HW2Ccode.dir

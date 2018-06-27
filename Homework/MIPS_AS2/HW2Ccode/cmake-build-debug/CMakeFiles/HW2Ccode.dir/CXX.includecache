@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/yanivbronshtein/CSCI240_QueensCollegeRepo/Homework/MIPS_AS2/HW2Ccode/main.cpp
+iostream
+-
+
